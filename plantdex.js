@@ -25,4 +25,4 @@ searchButton.addEventListener('click', () => {
     });
 });
 
-//TESTED!!!! API results are able to be console.logged based on user input 
+//TESTED!!!! API results are able to be console.logged based on user input!!
