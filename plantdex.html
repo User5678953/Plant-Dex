@@ -1,32 +1,16 @@
+<!-- HTML file -->
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="plantdex.css">
-
-    <title>Plantdex App</title>
+  <title>Plant Search</title>
 </head>
 <body>
-    <header>
-        <h1>PlantDex</h1>
-        <!--App logo here?-->
-        <p id="errorMessage" style="color: red; display: none;"></p>
-    </header>
+  <input type="text" id="userSearchInput" placeholder="Enter a plant name">
+  <button id="searchButton">Search</button>
 
-    <main>
-        <!-- Search Bar -->
-        <div class="search-bar">
-            <input type="text" id="userSearchInput" placeholder=" Type a plant name!">
-            <button id="searchButton">Search</button>
-        </div>
+  <!-- Add the search results container element -->
+  <div class="search-results"></div>
 
-        <!-- Search Results -->
-        <div class="search-results">
-        <!-- Results will display here -->
-        </div>
-    </main>
-
-    <script src="plantdex.js"></script>
+  <script src="plantdex.js"></script>
 </body>
 </html>
