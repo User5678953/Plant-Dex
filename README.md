@@ -10,6 +10,11 @@ Tech: JS HTML CSS
 Hosted by: Netifly
 
 Installation instructions 
+
+https://plant-dex-demo.netlify.app/plantdex.html
+
+
+
 Main logic approach
 
 1. Declare a variable to store the API response (lastAPIresponse).
