@@ -1,21 +1,41 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Plant Search App</title>
+  <link rel="stylesheet" href="plantdex.css">
+  <title>PlantDex</title>
 </head>
 <body>
-  <div class="search-bar">
-    <input type="text" id="userSearchInput" placeholder=" Enter plant name">
-    <button id="searchButton">Search</button>
-  </div>
+  <header>
+    <h1>PlantDex</h1>
+  </header>
 
-  <div class="search-results">
-    <!-- Results will be displayed here -->
-  </div>
+  <main>
+    <div class="search-bar">
+      <input type="text" id="userSearchInput" placeholder="Enter plant name">
+      <button id="searchButton">Search</button>
+    </div>
 
-  <script src="main.js"></script>
+    <div class="carousel-container">
+      <div class="carousel">
+      </div>
+
+      <div class="carousel-btn-container">
+        <button class="carousel-btn" id="prevButton">Previous</button>
+        <button class="carousel-btn" id="nextButton">Next</button>
+      </div>
+    </div>
+
+    <div class="search-results">
+      <!-- Search results will be displayed here -->
+    </div>
+
+    <div class="plant-details" id="currentPlantDetails">
+      <!-- Plant details will be displayed here on hover -->
+    </div>
+  </main>
+
+  <script src="plantdex.js"></script>
 </body>
 </html>
