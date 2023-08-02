@@ -1,16 +1,21 @@
-<!-- HTML file -->
+<!-- index.html -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Plant Search</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plant Search App</title>
 </head>
 <body>
-  <input type="text" id="userSearchInput" placeholder="Enter a plant name">
-  <button id="searchButton">Search</button>
+  <div class="search-bar">
+    <input type="text" id="userSearchInput" placeholder=" Enter plant name">
+    <button id="searchButton">Search</button>
+  </div>
 
-  <!-- Add the search results container element -->
-  <div class="search-results"></div>
+  <div class="search-results">
+    <!-- Results will be displayed here -->
+  </div>
 
-  <script src="plantdex.js"></script>
+  <script src="main.js"></script>
 </body>
 </html>
