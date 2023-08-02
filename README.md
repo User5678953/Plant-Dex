@@ -9,6 +9,9 @@ Tech: JS HTML CSS
 
 Hosted by: Netifly
 
+Installation instructions 
+Main logic approach
+
 1. Declare a variable to store the API response (lastAPIresponse).
 
 2. When the page is fully loaded (window.onload):
@@ -30,5 +33,4 @@ Hosted by: Netifly
          - Get the error message element from the DOM and display the error message to the user.
 
 3. End of the window.onload function.
-
 

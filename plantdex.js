@@ -28,7 +28,7 @@ window.onload = () => {
       })
       //Error handling in the event of failed fetch, display to user
       .catch(error => {
-        console.error('Error Fetching Data', error);
+        console.error('Error Fetching Data', error)
         const errorMessageElement = document.getElementById('errorMessage')
         errorMessageElement.textContent =
           'Oops! It seems like we failed to fetch the request in full. Some results may not be available'
@@ -45,7 +45,7 @@ window.onload = () => {
 // Event listener for "previous" button to show the previous plant
 document.getElementById('prevButton').addEventListener('click', () => {
   currentPlantIndex--; // Decrement the index
-  displaySearchResults(lastAPIresponse, currentPlantIndex);
+  displaySearchResults(lastAPIresponse, currentPlantIndex)
 });
 
 // Function to display the search results for the current plant at the specified index
@@ -79,49 +79,50 @@ console.log('Displaying search results:', data)
       resultElement.innerHTML = `
         <h2>${plantName}</h2>
         <img src="${imageURL}" alt="${plantName} Image">
+        <button class="get-details-button">Get Details</button>
         <p>Scientific Name: ${scientificName}</p>
         <p>Sunlight Requirement: ${sunlight}</p>
         <p>Watering Needs: ${watering}</p>
       `;
     // Append the result element to the search results div
-    searchResultsDisplayLocation.appendChild(resultElement);
+    searchResultsDisplayLocation.appendChild(resultElement)
 
     // Display the plant details beneath the plant photo
-    const plantDetailsElement = document.createElement('div');
-    plantDetailsElement.setAttribute('id', 'currentPlantDetails');
-    searchResultsDisplayLocation.appendChild(plantDetailsElement);
+    const plantDetailsElement = document.createElement('div')
+    plantDetailsElement.setAttribute('id', 'currentPlantDetails')
+    searchResultsDisplayLocation.appendChild(plantDetailsElement)
 
     // Add a click event listener to fetch plant details when the user clicks on a specific plant
     resultElement.addEventListener('click', () => {
       fetchPlantDetails(plant.id)
         .then(plantDetails => {
-          displayPlantDetails(plantDetails, plantDetailsElement);
+          displayPlantDetails(plantDetails, plantDetailsElement)
         })
         .catch(error => {
-          const errorMessageElement = document.createElement('p');
-          errorMessageElement.textContent = 'Error fetching plant details.';
+          const errorMessageElement = document.createElement('p')
+          errorMessageElement.textContent = 'Error fetching plant details.'
           plantDetailsElement.innerHTML = ''; // Clear previous content
-          plantDetailsElement.appendChild(errorMessageElement);
-          console.error('Error Fetching Plant Details', error);
-        });
-    });
+          plantDetailsElement.appendChild(errorMessageElement)
+          console.error('Error Fetching Plant Details', error)
+        })
+    })
   } else {
     // Display message if no results found for the given plant
     console.log('No results found:', data);
-    const resultElement = document.createElement('div');
-    resultElement.innerHTML = 'No results found for the given plant.';
-    searchResultsDisplayLocation.appendChild(resultElement);
+    const resultElement = document.createElement('div')
+    resultElement.innerHTML = 'No results found for the given plant.'
+    searchResultsDisplayLocation.appendChild(resultElement)
   }
 }
 
 // Function to fetch the details of a specific plant using its ID
 function fetchPlantDetails(plantId) {
-  const apiURL = `https://perenual.com/api/species/details/${plantId}`;
-  const apiKey = 'sk-tscM64c545f72b5721675';
+  const apiURL = `https://perenual.com/api/species/details/${plantId}`
+  const apiKey = 'sk-tscM64c545f72b5721675'
 
   // Create the URL with the query parameter
   const url = new URL(apiURL);
-  url.searchParams.append('key', apiKey);
+  url.searchParams.append('key', apiKey)
 
   // Fetch the plant details and return the JSON response
   return fetch(url)
