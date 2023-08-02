@@ -46,7 +46,7 @@ window.onload = () => {
 document.getElementById('prevButton').addEventListener('click', () => {
   currentPlantIndex--; // Decrement the index
   displaySearchResults(lastAPIresponse, currentPlantIndex)
-});
+})
 
 // Function to display the search results for the current plant at the specified index
 function displaySearchResults(data, index) {

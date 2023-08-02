@@ -39,3 +39,17 @@ Main logic approach
 
 3. End of the window.onload function.
 
+Issues/Fix: 
+>Issue: I initially attempted to implement a carousel using JavaScript, but it was challenging to get it to work correctly. This is where I restarted from the basic fetch logic and tried a different approach like just using the next and previous buttons. unfortunately I confused myself and deleted my work to try to revert the code back to just the working fetch API. I should have just pulled the first commit to overwrite my broken carousel attempt. 
+
+   >Fix: To simplify, I opted for next and previous buttons to navigate through search results, which provided a more straightforward solution. this created a carasouel effect. the challenge here and it took my a long time was that I needed to iterate through the plant index from the API within the display function. some plants didn't display photos and so in the abscense of, the code produced an error. The fix was to create logic that checked if the photo was available and if not, display default image. 
+
+>Issue: Centering elements on the page, such as the "PlantDex" banner, search bar, buttons, and plant name, was required.
+
+   >Fix: By applying CSS styles like display: flex, justify-content: center, and align-items: center, I achieved the desired centering effect.
+
+>Issue: I wanted plant details to be displayed when clicking a separate "Get Details" button below the picture, rather than when clicking the picture itself.
+
+   >Fix: I added a "Get Details" button and used a hover effect to fetch and display plant details on the right side of the page.
+
+
