@@ -12,20 +12,25 @@
   </header>
 
   <main>
-    <div class="search-bar">
-      <input type="text" id="userSearchInput" placeholder="Enter plant name">
-      <button id="searchButton">Search</button>
+    <section class="search-bar">
+      <input type="text" id="userSearchInput" placeholder="Enter plant name" aria-label="Search for a plant">
+      <button id="searchButton" aria-label="Search">Search</button>
+    </section>
+    <div class="carousel-btn-container">
+      <button class="carousel-btn" id="prevButton">Previous</button>
+      <button class="carousel-btn" id="nextButton">Next</button>
     </div>
-
-      <div class="carousel-btn-container">
-        <button class="carousel-btn" id="prevButton">Previous</button>
-        <button class="carousel-btn" id="nextButton">Next</button>
+    <section class="carousel">
+      <div id="loadingIndicator" class="loading" hidden>Loading...</div>
+      <div class="search-results" aria-live="polite">
+        <!-- Search results will be dynamically inserted here -->
       </div>
-    </div>
+    </section>
+  </main>
 
-    <div class="search-results">
-      <!-- Search results will be displayed here -->
-    </div>
+  <footer>
+    <p>© 2024 PlantDex. WebbyWebDev All rights reserved.</p>
+  </footer>
 
   <script src="plantdex.js"></script>
 </body>
