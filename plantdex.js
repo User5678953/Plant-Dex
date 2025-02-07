@@ -3,6 +3,8 @@ let currentPlantIndex = 0;
 let lastAPIResponse;
 const apiURL = 'https://perenual.com/api/species-list';
 const apiKey = 'sk-tscM64c545f72b5721675';
+let debounceTimeout;
+const defaultImageURL = './img/plant_emoji.jpg'; // Path to your default image
 
 // Execute when the document is fully loaded
 document.addEventListener('DOMContentLoaded', () => {
@@ -11,177 +13,201 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchButton = document.getElementById('searchButton');
   const nextButton = document.getElementById('nextButton');
   const prevButton = document.getElementById('prevButton');
+  const loadingIndicator = document.getElementById('loadingIndicator');
+  const errorDisplayLocation = document.querySelector('.error-message');
+
+  // Debounce function to limit the rate of API calls
+  function debounce(func, delay) {
+    return function(...args) {
+      clearTimeout(debounceTimeout);
+      debounceTimeout = setTimeout(() => func.apply(this, args), delay);
+    };
+  }
 
   // Event listener for the search button click, performs the search operation
   searchButton.addEventListener('click', () => {
-    console.log('Search button clicked');
     performSearch(searchInput.value);
   });
 
+  // Modified event listener for the search input with debounce
+  searchInput.addEventListener('input', debounce(() => {
+    performSearch(searchInput.value);
+  }, 600)); // Increased debounce time
+
   // Event listener for the "next" button to show the next plant in the results
   nextButton.addEventListener('click', () => {
-    console.log('Next button clicked');
-    navigatePlants('next');
+    if (currentPlantIndex < lastAPIResponse.data.length - 1) {
+      currentPlantIndex++; // Increment the index
+      displaySearchResults(lastAPIResponse, currentPlantIndex);
+    }
   });
 
   // Event listener for the "previous" button to show the previous plant in the results
   prevButton.addEventListener('click', () => {
-    console.log('Previous button clicked');
-    navigatePlants('prev');
+    if (currentPlantIndex > 0) {
+      currentPlantIndex--; // Decrement the index
+      displaySearchResults(lastAPIResponse, currentPlantIndex);
+    }
   });
+
+  // Show loading indicator during API calls
+  function performSearch(query) {
+    showLoadingIndicator(true);
+    clearPreviousResults();
+    
+    fetch(`${apiURL}?key=${apiKey}&q=${query}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Network response was not ok: ${response.statusText}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        showLoadingIndicator(false);
+        console.log('API response data:', data); // Log the data to understand its structure
+        lastAPIResponse = data; // Store API data
+        currentPlantIndex = 0;
+        displaySearchResults(data, currentPlantIndex);
+      })
+      .catch(error => {
+        showLoadingIndicator(false);
+        displayErrorMessage(error.message); // Call new function to display the error
+        console.error('Error during fetch:', error);
+      });
+  }
+
+  // New function to show API error messages in a red box
+  function displayErrorMessage(message) {
+    const errorBox = document.querySelector('.error-message');
+    
+    errorBox.textContent = message; // Set error text
+    errorBox.style.display = 'block'; // Make it visible
+  }
+
+  // Function to display search results
+  function displaySearchResults(data, index) {
+    const searchResults = document.querySelector('.search-results');
+    searchResults.innerHTML = ''; // Clear previous results
+
+    if (!data.data || data.data.length === 0) {
+        errorDisplayLocation.textContent = 'No results found.';
+        return;
+    }
+
+    // Ensure the index is within the valid range
+    index = Math.max(0, Math.min(index, data.data.length - 1));
+
+    // Get the plant at the specified index
+    const plant = data.data[index];
+
+    // Display the results for the current plant
+    const plantName = plant.common_name || 'Common Name not available';
+    const scientificName = plant.scientific_name.join(', ') || 'Scientific Name not available';
+    const sunlight = plant.sunlight[0] || 'Sunlight information not available';
+    const watering = plant.watering || 'Watering information not available';
+
+    // Check if medium_url exists, otherwise set a default image URL
+    const imageURL = plant.default_image?.medium_url || defaultImageURL;
+
+    // New result element for the current plant
+    const resultElement = document.createElement('div');
+    resultElement.classList.add('plant-result');
+
+    resultElement.innerHTML = `
+      <h2>${plantName}</h2>
+      <div class="image-container">
+        <img src="${imageURL}" alt="${plantName} Image">
+        <p class="default-image-message" style="display: none;">Sorry, we couldn't find a picture of <strong>${plantName}</strong>, but here's a cute lil' plant! 🌱</p>
+      </div>
+      <button class="get-details-button">Get Details</button>
+      <p>Scientific Name: ${scientificName}</p>
+      <p>Sunlight Requirement: ${sunlight}</p>
+      <p>Watering Needs: ${watering}</p>
+      <div class="plant-details" style="display: none;"></div> <!-- Hidden details container -->
+    `;
+
+    // Append the result element to the search results div
+    searchResults.appendChild(resultElement);
+
+    // Handle broken images
+    const imgElement = resultElement.querySelector('img');
+    const defaultMessage = resultElement.querySelector('.default-image-message');
+    
+    imgElement.onerror = function () {
+        this.onerror = null; // Prevent infinite loop
+        this.src = defaultImageURL;
+        defaultMessage.style.display = 'block'; // Show the message when the default image is used
+    };
+
+    // Attach event listener for "Get Details" button
+    const detailsButton = resultElement.querySelector('.get-details-button');
+    const detailsContainer = resultElement.querySelector('.plant-details');
+
+    detailsButton.addEventListener('click', () => {
+        if (detailsContainer.innerHTML === '') {
+            fetchPlantDetails(plant.id, detailsContainer);
+        } else {
+            detailsContainer.style.display = (detailsContainer.style.display === 'none') ? 'block' : 'none';
+        }
+    });
+  }
+
+  // Function to fetch the details of a specific plant using its ID
+  function fetchPlantDetails(plantId, displayElement) {
+    const detailsURL = `https://perenual.com/api/species/details/${plantId}`;
+    const url = new URL(detailsURL);
+    url.searchParams.append('key', apiKey);
+
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok.');
+            }
+            return response.json();
+        })
+        .then(plantDetails => {
+            displayPlantDetails(plantDetails, displayElement); // Inject into the correct section
+        })
+        .catch(error => {
+            console.error('Error Fetching Plant Details:', error);
+            displayElement.innerHTML = `<p class="error-message">Failed to load details. Please try again.</p>`;
+        });
+  }
+
+  // Function to display the plant details in the provided element
+  function displayPlantDetails(plantDetails, plantDetailsElement) {
+    if (!plantDetails || Object.keys(plantDetails).length === 0) {
+        plantDetailsElement.innerHTML = '<p>No details available for this plant.</p>';
+        return;
+    }
+
+    // Create the details section
+    const detailsHTML = `
+      <h3>Plant Details</h3>
+      <p><strong>Common Name:</strong> ${plantDetails.common_name || 'Not available'}</p>
+      <p><strong>Scientific Name:</strong> ${plantDetails.scientific_name?.join(', ') || 'Not available'}</p>
+      <p><strong>Family:</strong> ${plantDetails.family || 'Not available'}</p>
+      <p><strong>Care Level:</strong> ${plantDetails.care_level || 'Not available'}</p>
+      <p><strong>Cycle:</strong> ${plantDetails.cycle || 'Not available'}</p>
+      <p><strong>Description:</strong> ${plantDetails.description || 'Not available'}</p>
+    `;
+
+    plantDetailsElement.innerHTML = detailsHTML;
+    plantDetailsElement.style.display = 'block'; // Ensure visibility
+  }
+
+  // Function to show or hide the loading indicator
+  function showLoadingIndicator(show) {
+    loadingIndicator.style.display = show ? 'block' : 'none';
+  }
+
+  // Function to clear previous search results
+  function clearPreviousResults() {
+    const searchResultsDisplayLocation = document.querySelector('.search-results');
+    const errorBox = document.querySelector('.error-message');
+
+    searchResultsDisplayLocation.innerHTML = ''; 
+    errorBox.textContent = ''; // Clear previous error
+    errorBox.style.display = 'none'; // Hide error box
+  }
 });
-
-
-// Function to perform fetch with a timeout
-function fetchWithTimeout(resource, options = {}, timeout = 8000) {  // 8 seconds timeout
-  const controller = new AbortController();
-  const id = setTimeout(() => controller.abort(), timeout);
-  return fetch(resource, {
-    ...options,
-    signal: controller.signal
-  })
-  .then(response => {
-    clearTimeout(id);
-    if (response.status === 429) {
-      throw new Error('429 Too Many Requests');
-    }
-    return response;
-  })
-  .catch(error => {
-    clearTimeout(id);
-    throw error;
-  });
-}
-
-
-// Function to perform search using the API
-function performSearch(searchTerm) {
-  console.log('Search Term:', searchTerm);
-  const queryParams = new URLSearchParams({
-    key: apiKey,
-    q: searchTerm.trim()
-  });
-
-  fetchWithTimeout(`${apiURL}?${queryParams}`, {}, 8000)
-    .then(response => response.json())
-    .then(data => {
-      console.log('API Response:', data);
-      lastAPIResponse = data; // Store the API data globally
-      currentPlantIndex = 0; // Reset index to 0 for new search results
-      displaySearchResults(data, currentPlantIndex); // Display results starting from the first entry
-    })
-    .catch(error => {
-      console.error('Error Fetching Data', error);
-      displayError('Error Fetching Data', error);
-    });
-}
-
-// Function to handle navigation between plants (next and previous)
-function navigatePlants(direction) {
-  if (!lastAPIResponse || !lastAPIResponse.data) return; // Guard clause if no data
-  currentPlantIndex += direction === 'next' ? 1 : -1; // Adjust index based on direction
-  currentPlantIndex = Math.max(0, Math.min(currentPlantIndex, lastAPIResponse.data.length - 1)); // Clamp index within valid range
-  displaySearchResults(lastAPIResponse, currentPlantIndex); // Display the plant at new index
-}
-
-// Function to display the search results using the API data
-function displaySearchResults(data, index) {
-  const searchResultsDisplayLocation = document.querySelector('.search-results');
-  searchResultsDisplayLocation.innerHTML = ''; // Clear previous results
-
-  if (data && Array.isArray(data.data) && data.data.length > index) {
-    const plant = data.data[index]; // Extract plant data at current index
-    const resultElement = createPlantElement(plant); // Create HTML element for displaying the plant
-    searchResultsDisplayLocation.appendChild(resultElement); // Add new result to the page
-  } else {
-    searchResultsDisplayLocation.innerHTML = '<div>No results found for the given plant.</div>'; // Show message if no results
-  }
-}
-
-// Function to create HTML element for plant data
-function createPlantElement(plant) {
-  const { common_name, scientific_name, sunlight, watering, default_image } = plant;
-  const imageURL = default_image?.medium_url || 'No Image Available';
-
-  const resultElement = document.createElement('div');
-  resultElement.classList.add('plant-result');
-  resultElement.innerHTML = `
-    <h2>${common_name || 'Common Name not available'}</h2>
-    <img src="${imageURL}" alt="Image of ${common_name}">
-    <button class="get-details-button">Get Details</button>
-    <div class="plant-summary">
-      <p>Scientific Name: ${scientific_name.join(', ') || 'Scientific Name not available'}</p>
-      <p>Sunlight Requirement: ${sunlight[0] || 'Sunlight information not available'}</p>
-      <p>Watering Needs: ${watering || 'Watering information not available'}</p>
-    </div>
-    <div class="plant-details"></div> <!-- Container for additional details -->
-  `;
-
-  const detailsButton = resultElement.querySelector('.get-details-button');
-  const detailsContainer = resultElement.querySelector('.plant-details');
-  detailsButton.addEventListener('click', () => {
-    if (detailsContainer.innerHTML === '') {
-      fetchPlantDetails(plant.id, detailsContainer);
-    } else {
-      detailsContainer.innerHTML = ''; // Toggle visibility of details
-    }
-  });
-  return resultElement;
-}
-
-// Function to display an error message when the API call fails
-function displayError(message, error) {
-  console.error(message, error);
-  let errorMessageElement = document.getElementById('errorMessage');
-  if (!errorMessageElement) {
-    errorMessageElement = document.createElement('div');
-    errorMessageElement.id = 'errorMessage';
-    document.body.appendChild(errorMessageElement);
-  }
-  
-  // Handling rate limit specific error message
-  if (error.message.includes('429')) {
-    errorMessageElement.textContent = 'This API is rate limited, please wait a few moments before trying again.';
-  } else {
-    errorMessageElement.textContent = 'Oops! Something went wrong. Please try again later.';
-  }
-
-  errorMessageElement.style.display = 'block'; // Make error message visible
-}
-
-
-// Function to fetch the details of a specific plant using its ID
-function fetchPlantDetails(plantId, displayElement) {
-  const detailsURL = `https://perenual.com/api/species/details/${plantId}`;
-  const url = new URL(detailsURL);
-  url.searchParams.append('key', apiKey);
-
-  fetch(url)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok.');
-      }
-      return response.json();
-    })
-    .then(plantDetails => {
-      displayPlantDetails(plantDetails, displayElement); // Pass the display element to the display function
-    })
-    .catch(error => {
-      console.error('Error Fetching Plant Details', error);
-      displayError('Error Fetching Plant Details', error);
-    });
-}
-
-// Function to display the plant details in a specific DOM element
-function displayPlantDetails(plantDetails, plantDetailsElement) {
-  const detailsHTML = `
-    <h3>Details:</h3>
-    <p>Family: ${plantDetails.family || 'Not available'}</p>
-    <p>Care Level: ${plantDetails.care_level || 'Not available'}</p>
-    <p>Cycle: ${plantDetails.cycle || 'Not available'}</p>
-    <p>Description: ${plantDetails.description || 'Not available'}</p>
-  `;
-
-  plantDetailsElement.innerHTML = detailsHTML;
-  plantDetailsElement.style.display = 'block'; // Make sure details are shown
-}
