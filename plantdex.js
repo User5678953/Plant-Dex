@@ -134,16 +134,20 @@ document.addEventListener('DOMContentLoaded', () => {
     resultElement.classList.add('plant-result');
 
     resultElement.innerHTML = `
-      <h2>${plantName}</h2>
+      <h2 class="plant-name">${plantName}</h2>
       <div class="image-container">
         <img src="${imageURL}" alt="${plantName} Image">
-        <p class="default-image-message" style="display: none;">Sorry, we couldn't find a picture of <strong>${plantName}</strong>, but here's a cute lil' plant! 🌱</p>
+        <p class="default-image-message" style="display: none;">
+          Sorry, we couldn't find a picture of <strong>${plantName}</strong>, but here's a cute lil' plant! 🌱
+        </p>
       </div>
       <button class="get-details-button">Get Details</button>
-      <p>Scientific Name: ${scientificName}</p>
-      <p class="sunlight"><span class="emoji">☀️</span> ${sunlight}</p>
-      <p class="watering"><span class="emoji">💧</span> ${watering}</p>
-      <div class="plant-details" style="display: none;"></div> <!-- Hidden details container -->
+      <div class="plant-info">
+        <p class="scientific-name"><strong>Scientific:</strong> ${scientificName}</p>
+        <p class="sunlight"><span class="emoji">☀️</span> ${sunlight}</p>
+        <p class="watering"><span class="emoji">💧</span> ${watering}</p>
+      </div>
+      <div class="plant-details" style="display: none;"></div>
     `;
 
     // Append the result element to the search results div

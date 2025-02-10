@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="PlantDex - Explore and search for plants with ease.">
   <title>PlantDex</title>
-  <!-- Link to the main CSS file -->
+  <!-- Main CSS -->
   <link rel="stylesheet" href="plantdex.css">
   <!-- Font Awesome for icons (using a paint brush icon for theme switching) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" 
@@ -16,7 +16,7 @@
   <!-- Header Section -->
   <header>
     <h1>🌿 PlantDex</h1>
-    <!-- Theme toggle button using a paint brush icon for a creative touch -->
+    <!-- Theme toggle button using a paint brush icon -->
     <button id="themeToggle" class="theme-toggle" aria-label="Switch Theme">
       <i class="fas fa-paint-brush"></i>
     </button>
@@ -30,11 +30,11 @@
       <button id="searchButton" class="button" aria-label="Search">🔍 Search</button>
     </section>
     
-    <!-- Navigation Buttons for cycling through plant results -->
-    <div class="carousel-btn-container">
+    <!-- Navigation Section (using semantic <nav> tag) -->
+    <nav class="carousel-btn-container">
       <button class="carousel-btn button" id="prevButton" aria-label="Previous Plant">◀ Previous</button>
       <button class="carousel-btn button" id="nextButton" aria-label="Next Plant">Next ▶</button>
-    </div>
+    </nav>
     
     <!-- Loading Indicator & Error Display -->
     <div id="loadingIndicator" class="loading-indicator" hidden>🌱 Searching...</div>
@@ -49,7 +49,7 @@
     <p>© 2024 🌿 PlantDex by WebbyWebDev</p>
   </footer>
   
-  <!-- Link to external JavaScript (remains unchanged) -->
+  <!-- External JavaScript (remains unchanged) -->
   <script src="plantdex.js"></script>
 </body>
 </html>
