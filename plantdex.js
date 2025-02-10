@@ -16,6 +16,26 @@ document.addEventListener('DOMContentLoaded', () => {
   const loadingIndicator = document.getElementById('loadingIndicator');
   const errorDisplayLocation = document.querySelector('.error-message');
 
+  // Theme switching mechanism
+  const themeToggle = document.getElementById('themeToggle');
+  // Array of theme class names to cycle through; note that the default theme has no extra class
+  const themes = ['default', 'theme-light', 'theme-vibrant', 'theme-dark'];
+  let currentThemeIndex = 0;
+
+  themeToggle.addEventListener('click', () => {
+    // Remove any theme classes from <html> (or <body>)
+    document.documentElement.classList.remove(...themes.slice(1)); // Remove theme-light, theme-vibrant, and theme-dark
+
+    // Cycle to the next theme
+    currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+    const newTheme = themes[currentThemeIndex];
+
+    // If the new theme is not 'default', add the class to the <html> element
+    if (newTheme !== 'default') {
+      document.documentElement.classList.add(newTheme);
+    }
+  });
+
   // Debounce function to limit the rate of API calls
   function debounce(func, delay) {
     return function(...args) {
@@ -90,8 +110,8 @@ document.addEventListener('DOMContentLoaded', () => {
     searchResults.innerHTML = ''; // Clear previous results
 
     if (!data.data || data.data.length === 0) {
-        errorDisplayLocation.textContent = 'No results found.';
-        return;
+      errorDisplayLocation.textContent = 'No results found.';
+      return;
     }
 
     // Ensure the index is within the valid range
@@ -121,8 +141,8 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
       <button class="get-details-button">Get Details</button>
       <p>Scientific Name: ${scientificName}</p>
-      <p>Sunlight Requirement: ${sunlight}</p>
-      <p>Watering Needs: ${watering}</p>
+      <p class="sunlight"><span class="emoji">☀️</span> ${sunlight}</p>
+      <p class="watering"><span class="emoji">💧</span> ${watering}</p>
       <div class="plant-details" style="display: none;"></div> <!-- Hidden details container -->
     `;
 
@@ -134,9 +154,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const defaultMessage = resultElement.querySelector('.default-image-message');
     
     imgElement.onerror = function () {
-        this.onerror = null; // Prevent infinite loop
-        this.src = defaultImageURL;
-        defaultMessage.style.display = 'block'; // Show the message when the default image is used
+      this.onerror = null; // Prevent infinite loop
+      this.src = defaultImageURL;
+      defaultMessage.style.display = 'block'; // Show the message when the default image is used
     };
 
     // Attach event listener for "Get Details" button
@@ -144,11 +164,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const detailsContainer = resultElement.querySelector('.plant-details');
 
     detailsButton.addEventListener('click', () => {
-        if (detailsContainer.innerHTML === '') {
-            fetchPlantDetails(plant.id, detailsContainer);
-        } else {
-            detailsContainer.style.display = (detailsContainer.style.display === 'none') ? 'block' : 'none';
-        }
+      if (detailsContainer.innerHTML === '') {
+        fetchPlantDetails(plant.id, detailsContainer);
+      } else {
+        detailsContainer.style.display = (detailsContainer.style.display === 'none') ? 'block' : 'none';
+      }
     });
   }
 
@@ -159,26 +179,26 @@ document.addEventListener('DOMContentLoaded', () => {
     url.searchParams.append('key', apiKey);
 
     fetch(url)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok.');
-            }
-            return response.json();
-        })
-        .then(plantDetails => {
-            displayPlantDetails(plantDetails, displayElement); // Inject into the correct section
-        })
-        .catch(error => {
-            console.error('Error Fetching Plant Details:', error);
-            displayElement.innerHTML = `<p class="error-message">Failed to load details. Please try again.</p>`;
-        });
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok.');
+        }
+        return response.json();
+      })
+      .then(plantDetails => {
+        displayPlantDetails(plantDetails, displayElement); // Inject into the correct section
+      })
+      .catch(error => {
+        console.error('Error Fetching Plant Details:', error);
+        displayElement.innerHTML = `<p class="error-message">Failed to load details. Please try again.</p>`;
+      });
   }
 
   // Function to display the plant details in the provided element
   function displayPlantDetails(plantDetails, plantDetailsElement) {
     if (!plantDetails || Object.keys(plantDetails).length === 0) {
-        plantDetailsElement.innerHTML = '<p>No details available for this plant.</p>';
-        return;
+      plantDetailsElement.innerHTML = '<p>No details available for this plant.</p>';
+      return;
     }
 
     // Create the details section
