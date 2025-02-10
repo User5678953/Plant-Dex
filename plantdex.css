@@ -202,14 +202,15 @@ header h1 {
 }
 
 .search-results img {
-  width: 80%;
-  max-width: 15.625rem; /* 250px */
-  max-height: 15.625rem;
+  width: 100%;               /* Make the image fill the container's width */
+  max-width: 500px;          /* Allow the image to be larger (up from 250px) */
+  height: auto;              /* Maintain the aspect ratio */
   object-fit: contain;
   border-radius: 0.5rem;
   border: 0.1875rem solid var(--accent-hover); /* 3px */
   transition: opacity var(--transition-duration) ease-in-out;
 }
+
 
 .default-image-message {
   font-size: 0.9rem;
@@ -374,6 +375,7 @@ footer p {
   .plant-info p { font-size: 0.8rem; }
 }
 
+  
 @media (max-width: 768px) {
   header h1 { font-size: 1.8rem; }
   .search-bar { width: 100%; }
@@ -383,6 +385,8 @@ footer p {
   .plant-details h3 { font-size: 1rem; }
   .plant-details p { font-size: 0.8rem; }
   .plant-info p { font-size: 0.75rem; }
+  .search-results img {
+    max-width: 100%;
 }
 
 @media (max-width: 576px) {
