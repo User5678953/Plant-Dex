@@ -178,6 +178,7 @@ header h1 {
   align-items: center;
   gap: 1.25rem;
   padding: 1.25rem 0;
+  padding-bottom: 7rem;
 }
 
 .search-results div {
