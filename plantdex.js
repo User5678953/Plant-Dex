@@ -141,9 +141,9 @@ document.addEventListener('DOMContentLoaded', () => {
       Sorry, we couldn't find a picture of <strong>${plantName}</strong>, but here's a cute lil' plant! 🌱
       </p>
       </div>
-      <button class="get-details-button">🔍</button>
-      <button class="image-button">📷</button>
-      <button class="wiki-button">📖</button>
+      <button class="get-details-button">🔍Details</button>
+      <button class="image-button">📷Image</button>
+      <button class="wiki-button">📖Wiki</button>
       <div class="plant-info">
       <p class="scientific-name"><strong>Scientific:</strong> ${scientificName}</p>
       <p class="sunlight"><span class="emoji">☀️</span> ${sunlight}</p>
