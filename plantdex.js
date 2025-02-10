@@ -136,16 +136,18 @@ document.addEventListener('DOMContentLoaded', () => {
     resultElement.innerHTML = `
       <h2 class="plant-name">${plantName}</h2>
       <div class="image-container">
-        <img src="${imageURL}" alt="${plantName} Image">
-        <p class="default-image-message" style="display: none;">
-          Sorry, we couldn't find a picture of <strong>${plantName}</strong>, but here's a cute lil' plant! 🌱
-        </p>
+      <img src="${imageURL}" alt="${plantName} Image">
+      <p class="default-image-message" style="display: none;">
+      Sorry, we couldn't find a picture of <strong>${plantName}</strong>, but here's a cute lil' plant! 🌱
+      </p>
       </div>
-      <button class="get-details-button">Get Details</button>
+      <button class="get-details-button">🔍</button>
+      <button class="image-button">📷</button>
+      <button class="wiki-button">📖</button>
       <div class="plant-info">
-        <p class="scientific-name"><strong>Scientific:</strong> ${scientificName}</p>
-        <p class="sunlight"><span class="emoji">☀️</span> ${sunlight}</p>
-        <p class="watering"><span class="emoji">💧</span> ${watering}</p>
+      <p class="scientific-name"><strong>Scientific:</strong> ${scientificName}</p>
+      <p class="sunlight"><span class="emoji">☀️</span> ${sunlight}</p>
+      <p class="watering"><span class="emoji">💧</span> ${watering}</p>
       </div>
       <div class="plant-details" style="display: none;"></div>
     `;
@@ -173,6 +175,20 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         detailsContainer.style.display = (detailsContainer.style.display === 'none') ? 'block' : 'none';
       }
+    });
+
+    // Attach event listener for "Image" button to open a Google Image search for the plant name
+    const imageButton = resultElement.querySelector('.image-button');
+    imageButton.addEventListener('click', () => {
+      const query = encodeURIComponent(plantName);
+      window.open(`https://www.google.com/search?tbm=isch&q=${query}`, '_blank');
+    });
+
+    // Attach event listener for "Wiki" button to open a Wikipedia search for the plant name
+    const wikiButton = resultElement.querySelector('.wiki-button');
+    wikiButton.addEventListener('click', () => {
+      const query = encodeURIComponent(plantName);
+      window.open(`https://en.wikipedia.org/wiki/Special:Search?search=${query}`, '_blank');
     });
   }
 
