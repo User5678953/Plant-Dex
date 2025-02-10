@@ -268,18 +268,45 @@ header h1 {
 /* ===================================================================
    Footer Styles
    =================================================================== */
-footer {
-  width: 100%;
-  background-color: var(--header-bg);
-  color: var(--text-color);
-  text-align: center;
-  padding: 20px 0;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  font-size: 0.9rem;
-}
+   footer {
+    width: 100%;
+    background-color: var(--header-bg);
+    color: var(--text-color);
+    text-align: center;
+    padding: 12px 0;        
+    font-size: 0.9rem;
+    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);  /* Subtle shadow on top */
+    position: fixed;
+  }
+  
+  footer p {
+    margin: 0;                   /* Remove default margins for clean spacing */
+    letter-spacing: 0.5px;         /* Slight letter spacing for modern typography */
+  }/* ===================================================================
+   Footer Styles
+   =================================================================== */
+/* ===================================================================
+   Modern Footer Styles
+   =================================================================== */
+   footer {
+    width: 100%;
+    background-color: var(--header-bg);
+    color: var(--text-color);
+    text-align: center;
+    padding: 12px 0;
+    font-size: 0.9rem;
+    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);  /* Subtle shadow on top */
+    position: fixed;
+    bottom: 0;    /* Ensures the footer sticks to the bottom */
+    left: 0;      /* Aligns the footer to the left edge */
+  }
+  
+  footer p {
+    margin: 0;                   /* Remove default margins for clean spacing */
+    letter-spacing: 0.5px;         /* Slight letter spacing for modern typography */
+  }
+  
+
 
 /* ===================================================================
    Responsive Design Media Queries
