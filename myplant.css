@@ -1,0 +1,126 @@
+/* ===================================================================
+   Default Theme (Dark Green Style)
+   =================================================================== */
+   :root {
+    --bg-color: #28443e;
+    --text-color: #ffffff;
+    --header-bg: #0f1d1b;
+    --accent-color: #407050;
+    --transition-duration: 0.3s;
+    --plant-details-bg: #1b332d;
+    --plant-details-text-color: #ffffff;
+  }
+  
+  /* ===================================================================
+     Global Styles
+     =================================================================== */
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+  }
+  
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 0.8rem;
+  }
+  
+  /* ===================================================================
+     Header Styles
+     =================================================================== */
+  header {
+    background-color: var(--header-bg);
+    text-align: center;
+    padding: 1rem 2rem;
+    position: relative;
+  }
+  
+  header h1 {
+    font-size: 2.2rem;
+    margin: 0;
+  }
+  
+  .theme-toggle {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background-color: var(--accent-color);
+    border: none;
+    cursor: pointer;
+    width: 1.8rem;
+    height: 1.8rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform var(--transition-duration) ease;
+  }
+  
+  .theme-toggle:hover {
+    transform: scale(1.1);
+  }
+  
+  /* ===================================================================
+     Plant Gallery Styles
+     =================================================================== */
+  .plant-gallery {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .image-container {
+    background-color: var(--plant-details-bg);
+    color: var(--plant-details-text-color);
+    padding: 0.8rem;
+    margin: 0.8rem;
+    border-radius: 0.4rem;
+    max-width: 500px;
+    box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
+  }
+  
+  .image-container img {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 0.4rem;
+    border: 1.5px solid var(--accent-color);
+  }
+  
+  .image-container p {
+    font-size: 0.9rem;
+    margin: 0.4rem 0;
+  }
+  
+  /* ===================================================================
+     Footer Styles
+     =================================================================== */
+  footer {
+    background-color: var(--header-bg);
+    color: var(--text-color);
+    text-align: center;
+    padding: 0.6rem 0;
+    font-size: 0.8rem;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+  
+  /* ===================================================================
+     Responsive Design
+     =================================================================== */
+  @media (max-width: 768px) {
+    header h1 { font-size: 1.8rem; }
+    .image-container { max-width: 90%; }
+    .image-container p { font-size: 0.85rem; }
+  }
+  
+  @media (max-width: 480px) {
+    header h1 { font-size: 1.5rem; }
+    .image-container { max-width: 100%; }
+    .image-container p { font-size: 0.75rem; }
+  }
