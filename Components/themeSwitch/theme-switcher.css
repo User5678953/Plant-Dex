@@ -1,0 +1,36 @@
+/* Theme Toggle Button Styles */
+.theme-toggle {
+  position: absolute;
+  top: 1rem; /* Adjust as needed per page layout */
+  right: 1rem; /* Adjust as needed per page layout */
+  background-color: var(
+    --accent-color
+  ); /* Uses the page's current accent color */
+  color: var(
+    --text-color
+  ); /* Uses the page's current text color for the icon */
+  border: none;
+  cursor: pointer;
+  width: 2rem; /* Increased size slightly */
+  height: 2rem; /* Increased size slightly */
+  border-radius: 50%; /* Makes it circular */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem; /* Adjust icon size if needed */
+  transition: transform 0.2s ease, background-color 0.3s ease;
+  z-index: 1000; /* Ensure it's above other elements if needed */
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  background-color: var(
+    --accent-hover,
+    var(--accent-color)
+  ); /* Use hover color if available */
+}
+
+.theme-toggle i {
+  /* Style for the icon inside the button */
+  pointer-events: none; /* Ensures clicks go to the button, not the icon */
+}

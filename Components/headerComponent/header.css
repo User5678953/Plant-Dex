@@ -1,0 +1,27 @@
+/* Header Component Styles */
+header {
+  position: relative; /* Needed for absolute positioning of child elements like My Plant link and Theme Toggle */
+  background-color: var(--header-bg); /* Uses global theme variable */
+  text-align: center;
+  padding: 1.25rem 2.5rem; /* 20px & 40px in rem */
+  color: var(--text-color); /* Ensures text in header uses theme color */
+}
+
+header h1 {
+  font-size: 2.8rem;
+  margin: 0; /* Remove default margin to help with centering/spacing */
+  display: inline-block; /* Allows for better centering if needed, or side-by-side elements */
+}
+
+/* My Plant Link/Button Styling specific to its placement in the header */
+.myPlant-link.button {
+  position: absolute;
+  top: 1.25rem; /* Align with theme toggle vertically (adjust as needed) */
+  left: 1.25rem; /* Position on the left side */
+  text-decoration: none; /* Remove underline from link */
+  /* General .button styles (padding, background, etc.) will be inherited from plantdex.css */
+  /* This rule primarily handles positioning and specific link behavior */
+}
+
+/* Note: Styles for the theme toggle button itself are in components/themeSwitch/theme-switcher.css */
+/* General .button styles should remain in plantdex.css as they are used globally */

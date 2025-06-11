@@ -1,0 +1,12 @@
+/* filepath: c:\Users\Kendy\OneDrive\Desktop\SoftDev\2025 Project Repo\Plant-Dex\components\themes\LightTheme.css */
+/* Light Theme Overrides */
+.theme-light {
+  --bg-color: #f4f4f4; /* Page background */
+  --text-color: #333333;
+  --header-bg: #ffffff; /* Footer (and header) background - should be distinct */
+  --accent-color: #007acc;
+  --accent-hover: #005b99;
+  --search-results-bg: #e0e0e0;
+  --plant-details-bg: #ffffff;
+  --plant-details-text-color: #333333;
+}

@@ -1,0 +1,12 @@
+/* filepath: c:\Users\Kendy\OneDrive\Desktop\SoftDev\2025 Project Repo\Plant-Dex\components\themes\VibrantTheme.css */
+/* Vibrant Theme Overrides */
+.theme-vibrant {
+  --bg-color: #ffefd5;
+  --text-color: #333333;
+  --header-bg: #ff6347;
+  --accent-color: #ff4500;
+  --accent-hover: #ff6347;
+  --search-results-bg: #ffe4b5;
+  --plant-details-bg: #fff5e1;
+  --plant-details-text-color: #333333;
+}

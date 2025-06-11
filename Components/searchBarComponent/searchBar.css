@@ -1,0 +1,33 @@
+/* Search Bar Component Styles */
+.search-bar {
+  display: flex;
+  justify-content: center;
+  gap: 0.625rem; /* 10px */
+  margin: 1.25rem auto; /* 20px */
+  width: 90%;
+  max-width: 600px;
+}
+
+#userSearchInput {
+  flex-grow: 1;
+  padding: 0.75rem; /* 12px */
+  font-size: 1rem;
+  border-radius: 0.5rem; /* 8px */
+  border: 2px solid var(--accent-color); /* Uses global theme variable */
+  outline: none;
+  transition: border-color var(--transition-duration); /* Uses global theme variable */
+  color: var(--text-color); /* Ensure input text color matches theme */
+  background-color: var(--bg-color); /* Ensure input background matches theme */
+}
+
+#userSearchInput::placeholder {
+  color: var(--text-color); /* Style placeholder text color */
+  opacity: 0.7; /* Make placeholder slightly less prominent */
+}
+
+#userSearchInput:focus {
+  border-color: var(--accent-hover); /* Uses global theme variable */
+}
+
+/* Note: General .button styles for the search button remain in plantdex.css */
+/* Specific styles for #searchButton if any (beyond .button) could go here, but currently it only uses .button */

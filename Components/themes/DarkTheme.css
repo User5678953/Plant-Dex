@@ -1,0 +1,12 @@
+/* filepath: c:\Users\Kendy\OneDrive\Desktop\SoftDev\2025 Project Repo\Plant-Dex\components\themes\DarkTheme.css */
+/* Dark Theme Overrides (Optimized for Night Viewing) */
+.theme-dark {
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --header-bg: #1f1f1f;
+  --accent-color: #bb86fc;
+  --accent-hover: #985eff;
+  --search-results-bg: #1a1a1a;
+  --plant-details-bg: #1f1f1f;
+  --plant-details-text-color: #e0e0e0;
+}

@@ -1,109 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="PlantDex - Explore and search for plants with ease.">
-  <title>PlantDex</title>
-  <link rel="stylesheet" href="myplant.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" 
-        integrity="sha512-Fo3rlrZj/kTc+XK+6WXXCz0R2h0v8iRJr5U9YXhYI+OXv1orqlH+apEXgKfM3dKpSkbKf0QgFsvV1RlJj6ueUg==" 
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
-<body>
-  <header>
-    <h1>🌿 MyPlant</h1>
-    <a href="plantdex.html" class="myPlant-link" aria-label="Go to My Plant page">Back</a>
-    <button id="themeToggle" class="theme-toggle" aria-label="Switch Theme">
-      <i class="fas fa-paint-brush"></i>
-    </button>
-  </header>
-  
-  <main class="container">
-    <section class="plant-gallery">
-      <h2>My Garden Selections</h2>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="PlantDex - Explore and search for plants with ease."
+    />
+    <title>PlantDex - My Plants</title>
 
-      <div class="image-container">
-        <h3>Woodland Phlox (*Phlox divaricata*)</h3>
-        <img src="https://images.squarespace-cdn.com/content/v1/6193dec6e4cf5f0543fed8e4/1674679075716-RPT44TDQB85NSEORRHMZ/woodland-phlox-phlox-divaricata.jpg?format=1500w" alt="Woodland Phlox">
-        <p><strong>Planting Time:</strong> Early Spring (March - April)</p>
-        <p><strong>Water Needs:</strong> Moderate, keep moist but well-drained</p>
-        <p><strong>Sun Requirements:</strong> Partial Shade to Full Shade</p>
-      </div>
+    <!-- Theme Definition CSS Files -->
+    <link rel="stylesheet" href="components/themes/MainTheme.css" />
+    <link rel="stylesheet" href="components/themes/LightTheme.css" />
+    <link rel="stylesheet" href="components/themes/VibrantTheme.css" />
+    <link rel="stylesheet" href="components/themes/DarkTheme.css" />
 
-      <div class="image-container">
-        <h3>Wild Columbine (*Aquilegia canadensis*)</h3>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Wild_Columbine.jpg" alt="Wild Columbine">
-        <p><strong>Planting Time:</strong> Spring or Fall</p>
-        <p><strong>Water Needs:</strong> Moderate, tolerates dry soil</p>
-        <p><strong>Sun Requirements:</strong> Partial Shade to Full Sun</p>
-      </div>
+    <!-- Main CSS for this page -->
+    <link rel="stylesheet" href="myplant.css" />
 
-      <div class="image-container">
-        <h3>Purple Coneflower (*Echinacea purpurea*)</h3>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Echinacea_purpurea_Grandview_Prairie.jpg" alt="Purple Coneflower">
-        <p><strong>Planting Time:</strong> Spring (April - May)</p>
-        <p><strong>Water Needs:</strong> Low to Moderate, drought-tolerant</p>
-        <p><strong>Sun Requirements:</strong> Full Sun to Partial Shade</p>
-      </div>
+    <!-- Component CSS Files -->
+    <link rel="stylesheet" href="components/themeSwitch/theme-switcher.css" />
+    <link rel="stylesheet" href="components/footerComponent/footer.css" />
+    <!-- Font Awesome for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <h1>🌿 MyPlant</h1>
+      <a
+        href="plantdex.html"
+        class="button back-button"
+        aria-label="Go back to PlantDex page"
+      >
+        <i class="fas fa-arrow-left"></i>
+      </a>
+      <button id="themeToggle" class="theme-toggle" aria-label="Switch Theme">
+        <i class="fas fa-paint-brush"></i>
+      </button>
+    </header>
 
-      <div class="image-container">
-        <h3>Obedient Plant (*Physostegia virginiana*)</h3>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Physostegiavirg.jpg" alt="Obedient Plant">
-        <p><strong>Planting Time:</strong> Late Spring (May - June)</p>
-        <p><strong>Water Needs:</strong> Moderate</p>
-        <p><strong>Sun Requirements:</strong> Full Sun to Partial Shade</p>
-      </div>
+    <main class="container">
+      <section class="plant-gallery">
+        <h2>My Garden Selections</h2>
 
-      <div class="image-container">
-        <h3>Black-Eyed Susan (*Rudbeckia hirta*)</h3>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Rudbeckia_hirta_Indian_Summer.JPG" alt="Black-Eyed Susan">
-        <p><strong>Planting Time:</strong> Spring to Early Summer</p>
-        <p><strong>Water Needs:</strong> Low to Moderate, drought-resistant</p>
-        <p><strong>Sun Requirements:</strong> Full Sun</p>
-      </div>
+        <div class="image-container">
+          <h3>Woodland Phlox (*Phlox divaricata*)</h3>
+          <img
+            src="https://images.squarespace-cdn.com/content/v1/6193dec6e4cf5f0543fed8e4/1674679075716-RPT44TDQB85NSEORRHMZ/woodland-phlox-phlox-divaricata.jpg?format=1500w"
+            alt="Woodland Phlox"
+          />
+          <p><strong>Planting Time:</strong> Early Spring (March - April)</p>
+          <p>
+            <strong>Water Needs:</strong> Moderate, keep moist but well-drained
+          </p>
+          <p><strong>Sun Requirements:</strong> Partial Shade to Full Shade</p>
+        </div>
 
-      <<div class="image-container">
-        <h3>Cardinal Flower (*Lobelia cardinalis*)</h3>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/1/15/Lobelia_cardinalis_habit.jpg" alt="Cardinal Flower">
-        <p><strong>Planting Time:</strong> Spring to Early Summer</p>
-        <p><strong>Water Needs:</strong> High, thrives in moist soil</p>
-        <p><strong>Sun Requirements:</strong> Partial Shade to Full Sun</p>
-      </div>
+        <div class="image-container">
+          <h3>Wild Columbine (*Aquilegia canadensis*)</h3>
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/9/93/Wild_Columbine.jpg"
+            alt="Wild Columbine"
+          />
+          <p><strong>Planting Time:</strong> Spring or Fall</p>
+          <p><strong>Water Needs:</strong> Moderate, tolerates dry soil</p>
+          <p><strong>Sun Requirements:</strong> Partial Shade to Full Sun</p>
+        </div>
 
-      <div class="image-container">
-        <h3>Goldenrod (*Solidago spp.*)</h3>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/9/94/Solidago_canadensis_at_Kadavoor.jpg" alt="Goldenrod">
-        <p><strong>Planting Time:</strong> Spring or Fall</p>
-        <p><strong>Water Needs:</strong> Low, drought-tolerant</p>
-        <p><strong>Sun Requirements:</strong> Full Sun</p>
-      </div>
+        <div class="image-container">
+          <h3>Purple Coneflower (*Echinacea purpurea*)</h3>
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Echinacea_purpurea_Grandview_Prairie.jpg"
+            alt="Purple Coneflower"
+          />
+          <p><strong>Planting Time:</strong> Spring (April - May)</p>
+          <p><strong>Water Needs:</strong> Low to Moderate, drought-tolerant</p>
+          <p><strong>Sun Requirements:</strong> Full Sun to Partial Shade</p>
+        </div>
 
-      <h2>🌿 Ground Covers & Foliage</h2>
+        <div class="image-container">
+          <h3>Obedient Plant (*Physostegia virginiana*)</h3>
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Physostegiavirg.jpg"
+            alt="Obedient Plant"
+          />
+          <p><strong>Planting Time:</strong> Late Spring (May - June)</p>
+          <p><strong>Water Needs:</strong> Moderate</p>
+          <p><strong>Sun Requirements:</strong> Full Sun to Partial Shade</p>
+        </div>
 
-      <div class="image-container"></div>
-        <h3>Lady Fern (*Athyrium filix-femina*)</h3>
-        <img src="https://images.mobot.org/PlantRecordsVol2/prod/large960/00001000/1583_B630-0901020.jpg" alt="Lady Fern">
-        <p><strong>Planting Time:</strong> Spring or Fall</p>
-        <p><strong>Water Needs:</strong> Moderate</p>
-        <p><strong>Sun Requirements:</strong> Partial to Full Shade</p>
-      </div>
+        <div class="image-container">
+          <h3>Black-Eyed Susan (*Rudbeckia hirta*)</h3>
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Rudbeckia_hirta_Indian_Summer.JPG"
+            alt="Black-Eyed Susan"
+          />
+          <p><strong>Planting Time:</strong> Spring to Early Summer</p>
+          <p>
+            <strong>Water Needs:</strong> Low to Moderate, drought-resistant
+          </p>
+          <p><strong>Sun Requirements:</strong> Full Sun</p>
+        </div>
 
-      <div class="image-container">
-        <h3>Wild Ginger (*Asarum canadense*)</h3>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/a/ae/Asarum_canadense.jpg" alt="Wild Ginger">
-        <p><strong>Planting Time:</strong> Spring or Fall</p>
-        <p><strong>Water Needs:</strong> Moderate, prefers moist soil</p>
-        <p><strong>Sun Requirements:</strong> Full Shade to Partial Shade</p>
-      </div>
+        <div class="image-container">
+          <h3>Cardinal Flower (*Lobelia cardinalis*)</h3>
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/1/15/Lobelia_cardinalis_habit.jpg"
+            alt="Cardinal Flower"
+          />
+          <p><strong>Planting Time:</strong> Spring to Early Summer</p>
+          <p><strong>Water Needs:</strong> High, thrives in moist soil</p>
+          <p><strong>Sun Requirements:</strong> Partial Shade to Full Sun</p>
+        </div>
 
-    </section>
-  </main>
-  
-  <footer>
-    <p>© 2024 🌿 PlantDex by WebbyWebDev</p>
-  </footer>
-  
-  <script src="plantdex.js"></script>
-</body>
+        <div class="image-container">
+          <h3>Goldenrod (*Solidago spp.*)</h3>
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/9/94/Solidago_canadensis_at_Kadavoor.jpg"
+            alt="Goldenrod"
+          />
+          <p><strong>Planting Time:</strong> Spring or Fall</p>
+          <p><strong>Water Needs:</strong> Low, drought-tolerant</p>
+          <p><strong>Sun Requirements:</strong> Full Sun</p>
+        </div>
+
+        <h2>🌿 Ground Covers & Foliage</h2>
+
+        <div class="image-container">
+          <h3>Lady Fern (*Athyrium filix-femina*)</h3>
+          <img
+            src="https://images.mobot.org/PlantRecordsVol2/prod/large960/00001000/1583_B630-0901020.jpg"
+            alt="Lady Fern"
+          />
+          <p><strong>Planting Time:</strong> Spring or Fall</p>
+          <p><strong>Water Needs:</strong> Moderate</p>
+          <p><strong>Sun Requirements:</strong> Partial to Full Shade</p>
+        </div>
+
+        <div class="image-container">
+          <h3>Wild Ginger (*Asarum canadense*)</h3>
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/a/ae/Asarum_canadense.jpg"
+            alt="Wild Ginger"
+          />
+          <p><strong>Planting Time:</strong> Spring or Fall</p>
+          <p><strong>Water Needs:</strong> Moderate, prefers moist soil</p>
+          <p><strong>Sun Requirements:</strong> Full Shade to Partial Shade</p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>© 2024 🌿 PlantDex by WebbyWebDev</p>
+    </footer>
+
+    <!-- Theme Switcher JavaScript -->
+    <script defer src="components/themeSwitch/theme-switcher.js"></script>
+    <script src="plantdex.js"></script>
+  </body>
 </html>

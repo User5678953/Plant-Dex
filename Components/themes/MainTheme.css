@@ -1,0 +1,11 @@
+:root {
+  --bg-color: #28443e;
+  --text-color: #ffffff;
+  --header-bg: #0f1d1b;
+  --accent-color: #407050;
+  --accent-hover: #559a70;
+  --search-results-bg: #1b332d;
+  --plant-details-bg: #e2e2e2; /* Used for expanded details in plantdex */
+  --plant-details-text-color: #ffffff; /* Text color for plant-details-bg */
+  --transition-duration: 0.3s;
+}
